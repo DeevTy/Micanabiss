@@ -236,3 +236,146 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style); 
+
+// Enhanced scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const animateElements = document.querySelectorAll('.product-card, .about-content, .contact-content, .footer-section');
+    animateElements.forEach(el => {
+        el.classList.add('scroll-animate');
+        observer.observe(el);
+    });
+});
+
+// Image loading effects
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        // Add loading class
+        img.classList.add('loading');
+        
+        // Remove loading class when image loads
+        img.addEventListener('load', () => {
+            img.classList.remove('loading');
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.style.transition = 'opacity 0.5s ease';
+                img.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Handle image load errors
+        img.addEventListener('error', () => {
+            img.classList.remove('loading');
+            img.style.opacity = '0.5';
+        });
+    });
+});
+
+// Button click effects with ripple
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.buy-button, .cta-button, .submit-button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+});
+
+// Parallax effect for hero section
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroImage = document.querySelector('.hero-img');
+    
+    if (heroImage) {
+        const rate = scrolled * -0.5;
+        heroImage.style.transform = `translateY(${rate}px)`;
+    }
+});
+
+// Enhanced form submission handling
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector('.contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('.submit-button');
+            
+            // Show loading state
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                submitButton.textContent = 'Message Sent!';
+                submitButton.style.backgroundColor = '#28a745';
+                
+                // Reset form
+                setTimeout(() => {
+                    this.reset();
+                    submitButton.textContent = 'Send Message';
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = '#000000';
+                }, 2000);
+            }, 1500);
+        });
+    }
+});
+
+// Enhanced navbar background change on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    
+    if (window.scrollY > 100) {
+        navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+        navbar.style.backdropFilter = 'blur(10px)';
+    } else {
+        navbar.style.backgroundColor = '#000000';
+        navbar.style.backdropFilter = 'none';
+    }
+});
+
+// Add CSS for ripple effect
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .buy-button, .cta-button, .submit-button {
+        position: relative;
+        overflow: hidden;
+    }
+`;
+document.head.appendChild(rippleStyle); 
