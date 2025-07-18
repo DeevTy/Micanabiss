@@ -1,0 +1,35 @@
+{
+  "name": "micanabis-website",
+  "version": "1.0.0",
+  "description": "Professional cannabis skincare website for Micanabis brand",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "cannabis",
+    "skincare",
+    "cbd",
+    "wellness",
+    "website",
+    "minimalist",
+    "professional"
+  ],
+  "author": "Micanabis",
+  "license": "Proprietary",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micanabis/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/micanabis/website/issues"
+  },
+  "homepage": "https://micanabis.com",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+} 
